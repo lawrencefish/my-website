@@ -102,6 +102,16 @@
             color: #888;
         }
 
+        .logo-link {
+            text-decoration: none;
+        }
+
+        .logo-link .nav-logo {
+            color: #ff6f61;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             nav {
                 display: none;
@@ -161,16 +171,23 @@
                 transform: translateY(100vh);
             }
         }
+
+        @media (max-width: 768px) {
+            body {
+                background-image: url("./images/010.jpg");
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <div class="nav-logo">🎂 生日快樂</div>
+        <a href="index.html" class="logo-link">
+            <div class="nav-logo">🎂 生日快樂</div>
+        </a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav id="menu">
-            <a href="index.html">首頁</a>
             <a href="plan.html">行程規劃</a>
             <a href="food.html">餐廳</a>
             <a href="hotel.html">旅館</a>
@@ -181,7 +198,7 @@
         <div class="card">
             <div class="balloons">🎈🎉🎂</div>
             <h1>惟茹生日快樂兒！</h1>
-            <p>第八次幫妳過生日！<br>祝妳平安健康、順心如意！</p>
+            <p>這是第八次幫妳過生日！<br>祝妳平安健康、順心如意！</p>
             <div class="footer">家瑜 🧡</div>
         </div>
     </main>
