@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>行程規劃</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #fff8f0, #ffe4e1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff6f61;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #ff6f61;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d94f4f;
+      margin-bottom: 2rem;
+    }
+
+    a.plan-link {
+      text-decoration: none;
+      display: block;
+    }
+
+    .plan-item {
+      background: white;
+      border-left: 6px solid #ff6f61;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      transition: background 0.2s ease;
+    }
+
+    .plan-item:hover {
+      background: #ffe8e2;
+    }
+
+    .plan-item span.emoji {
+      font-size: 1.5rem;
+    }
+
+    .plan-item div.text {
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 1rem;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-logo">🎂 生日快樂</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="menu">
+      <a href="index.html">首頁</a>
+      <a href="plan.html">行程規劃</a>
+      <a href="food.html">餐廳</a>
+      <a href="hotel.html">旅館</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🎈 6/7行程</h1>
+
+    <a href="https://maps.app.goo.gl/FdK7KomQcbe96GdK8" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🍔</span><div class="text">丹丹漢堡 - 佳里店</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/rYpXBNmn7VbvDXHs6" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🌳</span><div class="text">生命之樹</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/JQ9cKLH5a5rtP5Fb8" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🚩</span><div class="text">台灣最西點 - 國聖港燈塔</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/9FGE8HLeeoKxBBRQ7" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🍱</span><div class="text">碳佐麻里 - 台南新興店</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/vzHLiwRLimXYub4E7" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🏘️</span><div class="text">安平老街</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/SPBpwHSEUqwRPD2J6" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">📮</span><div class="text">安平出張所</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/9Cfi4HkQ73BiL52T9" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🍦</span><div class="text">NINAO Gelato 蜷尾家</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/4c6A7cdo4LasC3R88" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🌃</span><div class="text">花園夜市</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/4EFNiCCLK98JjXax8" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🍸</span><div class="text">Lazy Bar 懶人酒吧</div></div>
+    </a>
+
+    <a href="https://maps.app.goo.gl/MStcBhgimXKxLLty7" target="_blank" class="plan-link">
+      <div class="plan-item"><span class="emoji">🏨</span><div class="text">回旅館 ❤️</div></div>
+    </a>
+
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>旅館介紹</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f5f7fa, #eaeaea);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff6f61;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #ff6f61;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #3a3a3a;
+      margin-bottom: 2rem;
+    }
+
+    .hotel-info {
+      margin-bottom: 2rem;
+      color: #444;
+      line-height: 1.6;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-track img {
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.4);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      z-index: 2;
+      border-radius: 4px;
+    }
+
+    .carousel-button.left {
+      left: 10px;
+    }
+
+    .carousel-button.right {
+      right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 1rem;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-logo">🎂 生日快樂</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="menu">
+      <a href="index.html">首頁</a>
+      <a href="plan.html">行程規劃</a>
+      <a href="food.html">餐廳</a>
+      <a href="hotel.html">旅館</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🏨 台南桂田酒店</h1>
+    <div class="hotel-info">
+      桂田酒店是這次旅程的放鬆基地。<br>
+      希望妳喜歡兒～❤️
+    </div>
+
+    <div class="carousel-container">
+      <button class="carousel-button left" onclick="moveSlide(-1)">&#10094;</button>
+      <div class="carousel-track" id="carouselTrack">
+        <img src="images/006.jpg" alt="桂田酒店 1">
+        <img src="images/007.jpg" alt="桂田酒店 2">
+        <img src="images/008.jpg" alt="桂田酒店 3">
+        <img src="images/009.jpg" alt="桂田酒店 4">
+      </div>
+      <button class="carousel-button right" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    const track = document.getElementById('carouselTrack');
+    let index = 0;
+
+    function moveSlide(dir) {
+      const totalSlides = track.children.length;
+      index = (index + dir + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+  </script>
+
+</body>
+</html>

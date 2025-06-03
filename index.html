@@ -1,11 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生日快樂！</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url("./images/001.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6f61;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #ff6f61;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #ff6f61;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .balloons {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                padding: 0.5rem 1rem;
+            }
+
+            nav.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: floatUp 1s ease-out forwards;
+        }
+
+        .falling-balloon {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: fallDown 2.5s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(1.5);
+            }
+        }
+
+        @keyframes fallDown {
+            0% {
+                opacity: 1;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>My Web</h1>
+
+    <header>
+        <div class="nav-logo">🎂 生日快樂</div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="menu">
+            <a href="index.html">首頁</a>
+            <a href="plan.html">行程規劃</a>
+            <a href="food.html">餐廳</a>
+            <a href="hotel.html">旅館</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="balloons">🎈🎉🎂</div>
+            <h1>惟茹生日快樂兒！</h1>
+            <p>第八次幫妳過生日！<br>祝妳平安健康、順心如意！</p>
+            <div class="footer">家瑜 🧡</div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('show');
+        }
+
+        // 點擊冒愛心
+        document.addEventListener("click", function (e) {
+            const heart = document.createElement("div");
+            heart.className = "floating-emoji";
+            heart.innerText = "❤️";
+            heart.style.left = e.clientX + "px";
+            heart.style.top = e.clientY + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
+        });
+
+        // 自動掉氣球
+        setInterval(() => {
+            const balloon = document.createElement("div");
+            balloon.className = "falling-balloon";
+            balloon.innerText = "🎈";
+            balloon.style.left = Math.random() * window.innerWidth + "px";
+            balloon.style.top = "-50px";
+            document.body.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 2500);
+        }, 800);
+    </script>
 </body>
+
 </html>
