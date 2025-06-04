@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生日禮物</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #ffe6eb;
+            /* 淡粉紅 */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo-link {
+            text-decoration: none;
+        }
+
+        .logo-link .nav-logo {
+            color: #ff6f61;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6f61;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #ff6f61;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .gift-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+
+        .gift-img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-img:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-info {
+            display: none;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .gift-info img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .gift-info p {
+            color: #444;
+            font-size: 1.1rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: floatUp 1s ease-out forwards;
+        }
+
+        .falling-balloon {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: fallDown 2.5s linear forwards;
+        }
+
+        .gift-icon {
+            font-size: 5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-icon:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(1.5);
+            }
+        }
+
+        @keyframes fallDown {
+            0% {
+                opacity: 1;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                padding: 0.5rem 1rem;
+            }
+
+            nav.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <div class="nav-logo">🎂 生日快樂</div>
+        </a>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="menu">
+            <a href="plan.html">行程規劃</a>
+            <a href="food.html">餐廳</a>
+            <a href="hotel.html">旅館</a>
+            <a href="gift.html">禮物</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="gift-container" id="giftContainer">
+            <div id="giftIcon" class="gift-icon" onclick="revealGift()">🎁</div>
+
+            <div class="gift-info" id="giftInfo" style="display: none;">
+                <h1>香奈兒摩登COCO香水</h1>
+                <img src="./images/013.png" alt="禮物內容1" />
+                <img src="./images/014.png" alt="禮物內容2" />
+                <p>
+                    香奈兒摩登COCO香水散發怡人的琥珀調，<br>
+                    一款朝氣蓬勃，飽滿馥郁的香氛。<br>
+                    開瓶後，清爽淡雅，充滿活力的柑橘香氣撲鼻而來，<br>
+                    中調則是茉莉與玫瑰花香，綻放澄透性感的魅力。<br>
+                    最後注入廣藿香、香根草作為餘韻，<br>
+                    烘托出充滿層次的細緻結構。
+                </p>
+                <br>
+                <p>
+                    這瓶香水是我精心挑選的，<br>
+                    希望它的香氣能讓妳每次聞到都感到安心與喜悅，<br>
+                    希望妳會喜歡 ❤️
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('show');
+        }
+
+        function revealGift() {
+            document.getElementById("giftIcon").style.display = "none";
+            document.getElementById("giftInfo").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>

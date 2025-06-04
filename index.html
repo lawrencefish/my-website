@@ -191,11 +191,15 @@
             <a href="plan.html">行程規劃</a>
             <a href="food.html">餐廳</a>
             <a href="hotel.html">旅館</a>
+            <a href="gift.html">禮物</a>
         </nav>
     </header>
 
     <main>
         <div class="card">
+            <div id="countdown" style="margin-top: 1.5rem; font-size: 1.2rem; color: #555;">
+                距離 6 月 8 日還有計算中...
+            </div>
             <div class="balloons">🎈🎉🎂</div>
             <h1>惟茹生日快樂兒！</h1>
             <p>這是第八次幫妳過生日！<br>祝妳平安健康、順心如意！</p>
@@ -229,6 +233,36 @@
             document.body.appendChild(balloon);
             setTimeout(() => balloon.remove(), 2500);
         }, 800);
+
+        function updateCountdown() {
+            // 取得現在時間（UTC時間）
+            const now = new Date();
+
+            // 設定目標時間：台灣時間 6/8 00:00（UTC+8）
+            // 先建立 2025-06-08 00:00 台灣時間，轉換成 UTC 時間
+            // 因為 Date() 建立的時間是本地時間，為避免錯誤，直接用 Date.UTC() 並扣掉 8 小時時差
+            const targetUTC = Date.UTC(2025, 5, 8, 0, 0, 0) - (8 * 60 * 60 * 1000);
+
+            // 計算倒數毫秒數
+            const diff = targetUTC - now.getTime();
+
+            if (diff <= 0) {
+                document.getElementById("countdown").innerHTML = "時間到了！🎉";
+                clearInterval(timer);
+                return;
+            }
+
+            // 換算成小時、分鐘、秒
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `距離 2025 年 6 月 8 日還有<br>${hours} 小時 ${minutes} 分鐘 ${seconds} 秒`;
+        }
+
+        const timer = setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 
