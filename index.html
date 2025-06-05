@@ -142,6 +142,18 @@
                 transform: translateY(0);
             }
         }
+
+        .fade-blur-out {
+            animation: fadeBlurOut 0.8s forwards;
+            will-change: opacity, filter;
+        }
+
+        @keyframes fadeBlurOut {
+            to {
+                opacity: 0;
+                filter: blur(6px);
+            }
+        }
     </style>
 </head>
 
@@ -152,6 +164,22 @@
         <div class="blur-text">I will always love you.</div>
         <a href="home.html" class="mystic-btn delayed">Enter</a>
     </div>
+
+    <script>
+        const wrapper = document.querySelector('.wrapper');
+        const btn = document.querySelector('.mystic-btn');
+
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            wrapper.classList.add('fade-blur-out');
+        });
+
+        wrapper.addEventListener('animationend', e => {
+            if (e.animationName === 'fadeBlurOut') {
+                window.location.href = btn.href;
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -176,6 +176,11 @@
                 background-image: url("./images/010.jpg");
             }
         }
+
+        html,
+        body {
+            overflow-x: hidden;
+        }
     </style>
 </head>
 
@@ -231,7 +236,9 @@
             const balloon = document.createElement("div");
             balloon.className = "falling-balloon";
             balloon.innerText = "🎈";
-            balloon.style.left = Math.random() * window.innerWidth + "px";
+            const balloonSize = 32;  // 大約 2rem 對應的像素
+            const maxLeft = window.innerWidth - balloonSize;
+            balloon.style.left = Math.random() * maxLeft + "px";
             balloon.style.top = "-50px";
             document.body.appendChild(balloon);
             setTimeout(() => balloon.remove(), 2500);
