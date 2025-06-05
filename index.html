@@ -1,272 +1,157 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>生日快樂！ 惟茹</title>
+    <title>Welcome Wei RU</title>
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-image: url("./images/001.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
+            background-color: #0a0a0a;
+            color: #ccc;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff6f61;
-        }
-
-        nav {
-            display: flex;
-            gap: 1rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        nav a:hover {
-            color: #ff6f61;
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 2rem;
+            overflow: hidden;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        .wrapper {
             text-align: center;
-            max-width: 500px;
-            width: 100%;
+            padding: 2rem;
         }
 
         h1 {
-            color: #ff6f61;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        .balloons {
             font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            color: #eee;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
         }
 
-        .footer {
+        .sub {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #888;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out 1s forwards;
+            font-style: italic;
+        }
+
+        .blur-text {
             margin-top: 1.5rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            color: #444;
+            filter: blur(2px);
+            letter-spacing: 0.05em;
+            user-select: none;
+            opacity: 0;
+            animation: fadeIn 4s ease-in-out 2s forwards;
         }
 
-        .logo-link {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .sub {
+                font-size: 1rem;
+            }
+        }
+
+        /* 質感按鈕樣式 */
+        .mystic-btn {
+            display: inline-block;
+            margin-top: 4rem;
+            padding: 0.75rem 2rem;
+            color: #eee;
+            background-color: transparent;
+            border: 1px solid #444;
+            border-radius: 50px;
             text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
         }
 
-        .logo-link .nav-logo {
-            color: #ff6f61;
-            font-size: 1.5rem;
-            font-weight: bold;
+        /* 延遲出現：等畫面其他東西都跑完才登場 */
+        .mystic-btn.delayed {
+            animation-delay: 5s;
+            /* 可調整秒數 */
         }
 
-        @media (max-width: 768px) {
-            nav {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                right: 1rem;
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
-                padding: 0.5rem 1rem;
-            }
-
-            nav.show {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-        }
-
-        .floating-emoji {
+        /* 背景光流動效果 */
+        .mystic-btn::before {
+            content: '';
             position: absolute;
-            font-size: 2rem;
-            pointer-events: none;
-            animation: floatUp 1s ease-out forwards;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(120deg, #444, #999, #444);
+            opacity: 0.08;
+            transform: skewX(-20deg);
+            transition: all 0.5s ease;
+            z-index: -1;
         }
 
-        .falling-balloon {
-            position: absolute;
-            font-size: 2rem;
-            pointer-events: none;
-            animation: fallDown 2.5s linear forwards;
+        .mystic-btn:hover::before {
+            left: 0;
         }
 
-        @keyframes floatUp {
+        .mystic-btn:hover {
+            border-color: #888;
+            color: #fff;
+            text-shadow: 0 0 5px #ccc;
+        }
+
+        /* 登場動畫 */
+        @keyframes fadeInUp {
             0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
+                opacity: 0;
+                transform: translateY(20px);
             }
 
             100% {
-                opacity: 0;
-                transform: translateY(-80px) scale(1.5);
-            }
-        }
-
-        @keyframes fallDown {
-            0% {
                 opacity: 1;
-                transform: translateY(-50px);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateY(100vh);
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                background-image: url("./images/010.jpg");
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 
 <body>
-
-    <header>
-        <a href="index.html" class="logo-link">
-            <div class="nav-logo">🎂 生日快樂</div>
-        </a>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <nav id="menu">
-            <a href="plan.html">行程</a>
-            <a href="food.html">餐廳</a>
-            <a href="hotel.html">旅館</a>
-            <a href="gift.html">禮物</a>
-        </nav>
-    </header>
-
-    <main>
-        <div class="card">
-            <div id="countdown" style="margin-top: 1.5rem; font-size: 1.2rem; color: #555;">
-                距離 6 月 8 日還有計算中...
-            </div>
-            <div class="balloons">🎈🎉🎂</div>
-            <h1>惟茹生日快樂兒！</h1>
-            <p>
-                這是我第八次幫妳過生日！<br>
-                祝妳平安健康、順心如意！<br>
-                天天都有好心情~
-            </p>
-            <div class="footer">家瑜 ❤️</div>
-        </div>
-    </main>
-
-    <script>
-        function toggleMenu() {
-            document.getElementById('menu').classList.toggle('show');
-        }
-
-        // 點擊冒愛心
-        document.addEventListener("click", function (e) {
-            const heart = document.createElement("div");
-            heart.className = "floating-emoji";
-            heart.innerText = "❤️";
-            heart.style.left = e.clientX + "px";
-            heart.style.top = e.clientY + "px";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 1000);
-        });
-
-        // 自動掉氣球
-        setInterval(() => {
-            const balloon = document.createElement("div");
-            balloon.className = "falling-balloon";
-            balloon.innerText = "🎈";
-            balloon.style.left = Math.random() * window.innerWidth + "px";
-            balloon.style.top = "-50px";
-            document.body.appendChild(balloon);
-            setTimeout(() => balloon.remove(), 2500);
-        }, 800);
-
-        function updateCountdown() {
-            // 取得現在時間（UTC時間）
-            const now = new Date();
-
-            // 設定目標時間：台灣時間 6/8 00:00（UTC+8）
-            // 先建立 2025-06-08 00:00 台灣時間，轉換成 UTC 時間
-            // 因為 Date() 建立的時間是本地時間，為避免錯誤，直接用 Date.UTC() 並扣掉 8 小時時差
-            const targetUTC = Date.UTC(2025, 5, 8, 0, 0, 0) - (8 * 60 * 60 * 1000);
-
-            // 計算倒數毫秒數
-            const diff = targetUTC - now.getTime();
-
-            if (diff <= 0) {
-                document.getElementById("countdown").innerHTML = "時間到了！🎉";
-                clearInterval(timer);
-                return;
-            }
-
-            // 換算成小時、分鐘、秒
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML =
-                `距離 2025 年 6 月 8 日還有<br>${hours} 小時 ${minutes} 分鐘 ${seconds} 秒`;
-        }
-
-        const timer = setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
+    <div class="wrapper">
+        <h1>Happy birthday, WeiRu</h1>
+        <div class="sub">This gift, just for you.</div>
+        <div class="blur-text">I will always love you.</div>
+        <a href="home.html" class="mystic-btn delayed">Enter</a>
+    </div>
 </body>
 
 </html>

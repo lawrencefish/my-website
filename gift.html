@@ -202,13 +202,79 @@
                 display: block;
             }
         }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal-box {
+            background: #fff0f5;
+            border-radius: 15px;
+            padding: 1.5rem;
+            max-width: 90%;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            animation: popIn 0.4s ease-in-out;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .modal-box h2 {
+            color: #ff6f61;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-box p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-box button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-box button:hover {
+            background-color: #ff3b3b;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <a href="index.html" class="logo-link">
+        <a href="home.html" class="logo-link">
             <div class="nav-logo">🎂 生日快樂</div>
         </a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -258,9 +324,42 @@
         }
 
         function revealGift() {
-            document.getElementById("giftIcon").style.display = "none";
-            document.getElementById("giftInfo").style.display = "block";
+            const now = new Date();
+            const taiwanOffset = 8 * 60;
+            const localOffset = now.getTimezoneOffset();
+            const taiwanTime = new Date(now.getTime() + (taiwanOffset + localOffset) * 60 * 1000);
+            const unlockTime = new Date('2025-06-06T22:00:00+08:00');
+
+            if (taiwanTime >= unlockTime) {
+                document.getElementById("giftIcon").style.display = "none";
+                document.getElementById("giftInfo").style.display = "block";
+            } else {
+                showModal("🎁 還不能打開", "禮物還在準備中，<br>時間到了才能打開唷！");
+            }
         }
+
+        function showModal(title, message) {
+            const modalOverlay = document.createElement("div");
+            modalOverlay.className = "modal-overlay";
+
+            const modalBox = document.createElement("div");
+            modalBox.className = "modal-box";
+
+            modalBox.innerHTML = `
+        <h2>${title}</h2>
+        <p>${message}</p>
+        <button onclick="closeModal(this)">知道了</button>
+    `;
+
+            modalOverlay.appendChild(modalBox);
+            document.body.appendChild(modalOverlay);
+        }
+
+        function closeModal(button) {
+            const overlay = button.closest(".modal-overlay");
+            overlay.remove();
+        }
+
     </script>
 </body>
 

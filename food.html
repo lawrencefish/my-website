@@ -125,13 +125,32 @@
                 display: block;
             }
         }
+
+        .menu-button {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background-color: #ff6f61;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #e05850;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <a href="index.html" class="logo-link">
+        <a href="home.html" class="logo-link">
             <div class="nav-logo">🎂 生日快樂</div>
         </a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -151,6 +170,7 @@
             <p>烤肉肉</p>
             <img src="images/002.jpg" alt="碳佐麻里環境照" />
             <img src="images/003.jpg" alt="碳佐麻里料理拼盤" />
+            <a class="menu-button" href="https://www.crun.com.tw/menu.php?act=view&id=41#my_album/15" target="_blank">📋 查看菜單</a>
         </div>
 
         <div class="restaurant">
